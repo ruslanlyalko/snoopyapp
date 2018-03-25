@@ -1,0 +1,347 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:card_view="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/card_margin"
+        android:layout_marginTop="@dimen/card_margin"
+        android:elevation="3dp"
+        card_view:cardCornerRadius="@dimen/card_radius">
+
+        <com.ruslanlyalko.snoopyapp.presentation.widget.SwipeLayout
+            android:id="@+id/swipe_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/swipe_menu"
+                android:layout_width="56dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:divider="?android:dividerHorizontal"
+                android:dividerPadding="2dp"
+                android:orientation="vertical"
+                android:showDividers="middle">
+
+                <ImageButton
+                    android:id="@+id/button_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_mk_dark" />
+
+                <ImageButton
+                    android:id="@+id/button_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_user_dark" />
+
+                <ImageButton
+                    android:id="@+id/button_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_calendar"
+                    android:visibility="invisible" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="16dp"
+                    android:src="@drawable/ic_action_mk" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/text_user_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Майстер клас"
+                            android:textSize="18sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/text_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="24-7"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Всього"
+                        android:textColor="@color/colorBlack" />
+
+                    <TextView
+                        android:id="@+id/text_total"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="1570 ГРН"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="32sp" />
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progress_height"
+                        android:layout_marginBottom="@dimen/progress_margin"
+                        android:layout_marginTop="@dimen/progress_margin"
+                        android:progressDrawable="@drawable/progress" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/text_t1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="Кімната"
+                                android:textColor="@color/colorBlack" />
+
+                            <TextView
+                                android:id="@+id/text_room_total"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="500 грн" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/text_t2"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="День народження"
+                                android:textColor="@color/colorBlack" />
+
+                            <TextView
+                                android:id="@+id/text_bday_total"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="540 грн" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.ruslanlyalko.snoopyapp.presentation.widget.SwipeLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout><!--
+        <com.example.android.kidsapp.utils.SwipeLayout
+            android:id="@+id/swipe_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/swipe_menu"
+                android:layout_width="56dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:divider="?android:dividerHorizontal"
+                android:dividerPadding="2dp"
+                android:showDividers="middle"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_user_name_dark" />
+
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_action_edit_dark" />
+
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_action_delete_red" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="16dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="16dp"
+                    android:src="@drawable/ic_user_name" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text_user_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="16dp"
+                        android:text="Анна Василівна"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="16dp"
+                        android:text="Всього"
+                        android:textColor="@color/colorBlack" />
+
+                    <TextView
+                        android:id="@+id/text_total"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="1570 ГРН"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="32sp" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar2"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:max="20"
+                        android:progress="5" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="Кімната"
+                                android:textColor="@color/colorBlack" />
+
+                            <TextView
+                                android:id="@+id/text_room_total"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="500 грн" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="День народження"
+                                android:textColor="@color/colorBlack" />
+
+                            <TextView
+                                android:id="@+id/text_bday_total"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="540 грн" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="МК"
+                                android:textColor="@color/colorBlack" />
+
+                            <TextView
+                                android:id="@+id/text_mk_total"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="530 грн" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+-->

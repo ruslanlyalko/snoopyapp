@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_button_calendar"
+        android:shortcutDisabledMessage="@string/shortcut_calendar_short_label"
+        android:shortcutId="calendar_id"
+        android:shortcutLongLabel="@string/shortcut_calendar_long_label"
+        android:shortcutShortLabel="@string/shortcut_calendar_short_label">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.ruslanlyalko.snoopyapp.presentation.ui.main.calendar.CalendarActivity"
+            android:targetPackage="com.ruslanlyalko.snoopyapp" />
+        <!-- If your shortcut is associated with multiple intents, include them
+             here. The last intent in the list determines what the user sees when
+             they launch this shortcut. -->
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_button_report"
+        android:shortcutDisabledMessage="@string/shortcut_report_short_label"
+        android:shortcutId="report_id"
+        android:shortcutLongLabel="@string/shortcut_report_long_label"
+        android:shortcutShortLabel="@string/shortcut_report_short_label">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.ruslanlyalko.snoopyapp.presentation.ui.main.report.ReportActivity"
+            android:targetPackage="com.ruslanlyalko.snoopyapp" />
+        <!-- If your shortcut is associated with multiple intents, include them
+             here. The last intent in the list determines what the user sees when
+             they launch this shortcut. -->
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+    <!-- Specify more shortcuts here. -->
+</shortcuts>
