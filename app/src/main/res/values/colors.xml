@@ -6,12 +6,10 @@
 
     <color name="colorProfit">#dce0e1</color>
     <color name="colorBackground">#f5f6f7</color>
-    <color name="colorBackground2">#f1f5f8</color>
     <color name="colorComment">#cad4cb</color>
 
     <color name="colorCommentBackground">#dce0e1</color>
     <color name="colorGray">#e1dcdc</color>
-    <color name="colorBgGray">#f4f4f4</color>
     <color name="colorGradient">#fafafa</color>
     <color name="colorDividers">#1F000000</color>
     <color name="colorDividersDark">#3C000000</color>
@@ -33,10 +31,7 @@
     <color name="colorIndigo500">#3F51B5</color>
     <color name="colorTeal500">#009688</color>
     <color name="colorDeepOrange500">#FF5722</color>
-    <color name="colorDarkGray">#323333</color>
     <color name="colorSteelGray">#7d7f80</color>
-    <color name="color1">#4fcc4f</color>
-    <color name="color2">#3aaa3c</color>
 
     <integer-array name="colors">
         <item>@color/colorPrimary</item>

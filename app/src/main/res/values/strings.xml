@@ -7,7 +7,6 @@
     <string name="toast_auth_failed">Не вдається ввійти! Перевірте, будь ласка, правильність введених даних</string>
     <string name="button_login">ВВІЙТИ</string>
     <string name="button_forgot_password">Забули пароль?</string>
-    <string name="button_link_to_register">Зареєструвати нового користувача</string>
 
     <!-- RESET PASS -->
     <string name="title_activity_reset_password">Відновлення паролю</string>
@@ -40,44 +39,31 @@
 
     <string name="hint_double_press">Натисніть ще раз аби вийти з додатку</string>
     <string name="button_about">Про проект</string>
-    <string name="button_calc">Тарифний Калькулятор</string>
     <string name="button_fb">Ми в Facebook</string>
-    <string name="phone_call">tel:0681990655</string>
 
     <!-- USER -->
     <string name="title_activity_user">Особистий кабінет</string>
-    <string name="text_days">"Робочих\nднів"</string>
-    <string name="text_money">Оборот</string>
-    <string name="text_master">Майстер\nклас</string>
-    <string name="text_bonus">Бонус</string>
-    <string name="text_total_salary">Всього за поточний місяць:</string>
     <string name="action_settings">Налаштування</string>
 
     <!-- USER SETTINGS-->
-    <string name="title_activity_settings">Ваш аккаунт</string>
-    <string name="button_save_changes">Зберегти зміни</string>
     <string name="toast_data_updated">Зміни збережено</string>
     <string name="action_logout">Вийти</string>
     <string name="dialog_logout_title">Вийти з аккаунта</string>
     <string name="dialog_logout_message"> Ви впевнені що бажаєте вийти з аккаунта?</string>
-    <string name="button_logout">Вийти з аккаунта</string>
 
     <!-- EVENTS -->
     <string name="title_activity_events">Повідомлення</string>
 
     <!-- REPORT -->
     <string name="title_activity_report">Свято</string>
-    <string name="button_save">Зберегти свято</string>
     <string name="action_edit">Редагувати</string>
     <string name="action_add">Зберегти свято</string>
 
     <!-- CALENDAR -->
     <string name="title_activity_calendar">Календар</string>
     <string name="toast_edit_impossible">Редагувати можна тільки сьогоднішній або майбутні свята</string>
-    <string name="toast_delete_impossible">Видалити можна тільки сьогоднішній або майбутні свята</string>
 
     <!-- M K -->
-    <string name="title_activity_mk">Майстер класи</string>
 
     <!-- Expense-->
     <string name="title_activity_cost">Витрати</string>
@@ -85,30 +71,12 @@
     <!-- NOTIFICATION-->
     <string name="title_activity_notification">Повідомлення</string>
 
-    <string-array name="month_array">
-        <item>Січень</item>
-        <item>Лютий</item>
-        <item>Березень</item>
-        <item>Квітень</item>
-        <item>Травень</item>
-        <item>Червень</item>
-        <item>Липень</item>
-        <item>Серпень</item>
-        <item>Вересень</item>
-        <item>Жовтень</item>
-        <item>Листопад</item>
-        <item>Грудень</item>
-    </string-array>
-
     <string name="dialog_delete_mk_title">Видалити майстер клас</string>
-    <string name="dialog_delete_mk_message">Після видалення відновити мастер клас буде неможливо</string>
     <string name="dialog_delete_title">Видалити свято</string>
     <string name="dialog_delete_message">Після видалення відновити свято буде неможливо</string>
 
     <string name="title_activity_dashboard">"Адмін панель (%1$s ГРН)"</string>
-    <string name="hint_date">Дата</string>
     <string name="mk_done">Проведено Майстер Класів: </string>
-    <string name="month_prev"><![CDATA[ < ]]></string>
     <string name="toast_report_saved">Свято збережено</string>
     <string name="hint_price">Ціна</string>
     <string name="hint_title2">Тип</string>
@@ -121,9 +89,6 @@
     <string name="dialog_cost_delete_message">Після видалення відновити витрату буде неможливо</string>
     <string name="dialog_cost_delete_all_title">Видалити всі витрати</string>
     <string name="dialog_cost_delete_all_message">Після видалення відновити витрати буде неможливо</string>
-    <string name="cant_delete">Неможливо видалити. Видаляти можливо тільки витрати створені Вами</string>
-    <string name="cant_delete_all">Неможливо видалити. Ця функція доступна тільки Адміністратору</string>
-    <string name="text_date">Дата</string>
     <string name="text_room">Кімната</string>
     <string name="text_all">Всього</string>
     <string name="text_birthdays">Дні Народження</string>
@@ -131,7 +96,6 @@
     <string name="text_charts">Чистий прибуток</string>
     <string name="dialog_delete_notification_title">Видалити діалог</string>
     <string name="dialog_delete_notification_message">Після видаленння відновити діалог буде неможливо</string>
-    <string name="dialog_about_title">Про програму</string>
     <string name="dialog_about_message">SNOOPY  \nv </string>
     <string name="text_copied">Скопійовано в буфер обміну</string>
     <string name="dialog_report_save_before_close_title">Зберегти зміни</string>
@@ -152,11 +116,9 @@
     <string name="text_salary_detail_bd_children">МК за одну дитину:</string>
     <string name="text_salary_detail_art">"Арт МК:"</string>
 
-    <string name="dialog_salary_title">Введіть значення</string>
     <string name="hint_comment">Добавити Коментар</string>
     <string name="action_clear_report">Очистити</string>
     <string name="action_delete_report">Видалити свято</string>
-    <string name="action_yesterday">Вчора</string>
     <string name="action_today">Сьогодні</string>
     <string name="toast_report_deleted">Свято видалено</string>
     <string name="action_go_to_calendar">КАЛЕНДАР</string>
@@ -165,15 +127,12 @@
     <string name="hint_time">Час роботи</string>
     <string name="action_new_user">Новий користувач</string>
     <string name="text_friend_list">Колеги</string>
-    <string name="button_notebook">Приват Нотатки</string>
     <string name="snack_deleted">Видалено</string>
     <string name="action_plan">План МК</string>
     <string name="action_save">Зберегти</string>
     <string name="title_activity_edit">Редагування</string>
     <string name="title_activity_add">Добавлення</string>
     <string name="hint_description">Детальний опис (не обовязково)</string>
-    <string name="mk_k">Кулінарний майстер клас</string>
-    <string name="mk_art">Творчий майстер клас</string>
     <string name="mk_updated">Дані обновлено успішно</string>
     <string name="mk_added">МК створено успішно</string>
     <string name="not_added">Діалог створено успішно</string>
@@ -184,7 +143,6 @@
     <string name="photo_uploading">"Фото загружається. Зачекайте хвильку.."</string>
     <string name="hint_first_date">Перший робочий день</string>
     <string name="photo_uploaded">Фото збережено</string>
-    <string name="section_format">Hello World from section: %1$d</string>
 
     <string name="tab_k">КУЛІНАРНІ</string>
     <string name="tab_t">ТВОРЧІ</string>
@@ -195,7 +153,6 @@
 
     <string name="title_activity_mk_plan">Майстер класи</string>
     <string name="title_activity_mk_tab">Майстер класи</string>
-    <string name="text_mk_list">Майстер класи</string>
     <string name="text_mk_full">Майстер клас</string>
     <string name="title_activity_mk_item">Майстер клас</string>
 
@@ -237,8 +194,6 @@
     <string name="action_save_changes">ЗБЕРЕГТИ ЗМІНИ</string>
     <string name="action_no">НІ</string>
     <string name="action_choose">ВИБРАТИ</string>
-    <string name="title_activity_calc">Тарифний Калькулятор</string>
-    <string name="title_activity_login22">Sign in</string>
 
     <!-- Strings related to REPORT -->
     <string name="image_permissions">Будь ласка, добавте дозвіл на використання камери</string>
@@ -258,7 +213,6 @@
     <string name="title_activity_alarm">SNOOPY    Чек-Лист</string>
     <string name="stop_alarm">Пройти Чек-Лист</string>
     <string name="text_comments_list">Дозволити коментувати</string>
-    <string name="button_send">Відправити</string>
     <string name="hint_comment_add">Введіть повідомлення…</string>
     <string name="dialog_remove_title">Видалити повідомлення?</string>
     <string name="choose_images">Виберіть картинку</string>
@@ -275,7 +229,6 @@
     <string name="tab_text_2">ДНІ НАРОДЖЕННЯ</string>
     <string name="contacts_filter_by_name">Фільтр: І\'мя</string>
     <string name="contacts_filter_by_phone">Фільтр: Телефон</string>
-    <string name="contacts_text_children">Діти</string>
     <string name="client_added">Контакт створено</string>
     <string name="hint_child1">Імя першої дитини</string>
     <string name="hint_child2">Імя другої дитини</string>
@@ -285,7 +238,6 @@
     <string name="check_mk">МК</string>
     <string name="check_aqua">Аквагрим</string>
     <string name="check_cinema">Кінотеатр</string>
-    <string name="hint_kids_count">Кількість дітей</string>
     <string name="add_birthday">Добавити Святкування Дня Народження в Чебурашці</string>
     <string name="text_kids">Кількість дітей:</string>
     <string name="hint_date_celebrating">Дата Святкування ДН:</string>

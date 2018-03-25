@@ -110,7 +110,7 @@ public class MainActivity extends BaseActivity {
                         if (user != null) {
                             FirebaseUtils.setIsAdmin(user.getUserIsAdmin());
                             FirebaseUtils.setUser(user);
-                            if(isDestroyed())return;
+                            if (isDestroyed()) return;
                             mLayoutClients.setVisibility(user.getUserIsAdmin() || user.getShowClients() ? View.VISIBLE : View.GONE);
                         }
                     }
@@ -139,7 +139,7 @@ public class MainActivity extends BaseActivity {
         mSwipeLayout.addSwipeListener(new SwipeLayout.SwipeListener() {
             @Override
             public void onStartOpen(SwipeLayout layout) {
-                mArrowButton.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_down3, 0, 0);
+                mArrowButton.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_button_down, 0, 0);
             }
 
             @Override
@@ -149,7 +149,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onStartClose(SwipeLayout layout) {
-                mArrowButton.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_up3, 0, 0);
+                mArrowButton.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_button_up, 0, 0);
             }
 
             @Override
