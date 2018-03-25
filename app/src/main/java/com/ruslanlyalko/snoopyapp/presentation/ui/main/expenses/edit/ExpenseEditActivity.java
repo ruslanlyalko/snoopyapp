@@ -92,8 +92,7 @@ public class ExpenseEditActivity extends BaseActivity implements EasyPermissions
         if (mIsNew) {
             mTextDate.setText(DateUtils.toString(new Date(), "d-M-yyyy"));
             mExpense = new Expense(mExpenseType,
-                    DateUtils.toString(new Date(), "d-M-yyyy"),
-                    DateUtils.toString(new Date(), "HH:mm"),
+                    new Date(),
                     mUser.getUid(),
                     mUser.getDisplayName());
         }
@@ -106,13 +105,13 @@ public class ExpenseEditActivity extends BaseActivity implements EasyPermissions
             setTitle(R.string.title_activity_add);
         } else {
             setTitle(R.string.title_activity_edit);
-            mTextDate.setText(mExpense.getDate());
+            mTextDate.setText(DateUtils.toString(mExpense.getExpenseDate()));
             mEditTitle1.setText(mExpense.getTitle1());
             mEditPrice.setText(String.valueOf(mExpense.getPrice()));
-            if (mExpense.getUri() != null && !mExpense.getUri().isEmpty() && mExpense.getUri().startsWith("http")) {
+            if (mExpense.getImage() != null && !mExpense.getImage().isEmpty() && mExpense.getImage().startsWith("http")) {
                 try {
                     mImageExpense.setVisibility(View.VISIBLE);
-                    Glide.with(ExpenseEditActivity.this).load(mExpense.getUri()).into(mImageExpense);
+                    Glide.with(ExpenseEditActivity.this).load(mExpense.getImage()).into(mImageExpense);
                 } catch (Exception e) {
                     //
                 }
@@ -202,7 +201,7 @@ public class ExpenseEditActivity extends BaseActivity implements EasyPermissions
         String imageFileName = DateUtils.getCurrentTimeStamp() + "_original" + ".jpg";
         uploadFile(imageFile, imageFileName, 85).addOnSuccessListener(taskSnapshot -> {
             if (taskSnapshot.getDownloadUrl() != null)
-                mExpense.setUri(taskSnapshot.getDownloadUrl().toString());
+                mExpense.setImage(taskSnapshot.getDownloadUrl().toString());
             mProgressBar.setVisibility(View.GONE);
             mButtonUpload.setVisibility(View.VISIBLE);
         }).addOnFailureListener(exception -> {
@@ -246,7 +245,6 @@ public class ExpenseEditActivity extends BaseActivity implements EasyPermissions
         if (mEditPrice.getText().toString().isEmpty())
             mEditPrice.setText("0");
         mExpense.setTitle1(mEditTitle1.getText().toString());
-        mExpense.setDate(mTextDate.getText().toString());
         mExpense.setPrice(Integer.parseInt(mEditPrice.getText().toString()));
     }
 
@@ -268,8 +266,8 @@ public class ExpenseEditActivity extends BaseActivity implements EasyPermissions
     private void updateExpense() {
         updateModel();
         database.getReference(DefaultConfigurations.DB_EXPENSES)
-                .child(DateUtils.getYearFromStr(mExpense.getDate()))
-                .child(DateUtils.getMonthFromStr(mExpense.getDate()))
+                .child(DateUtils.toString(mExpense.getExpenseDate(), "yyyy"))
+                .child(DateUtils.toString(mExpense.getExpenseDate(), "M"))
                 .child(mExpense.getKey())
                 .setValue(mExpense)
                 .addOnCompleteListener(task -> {
@@ -298,11 +296,11 @@ public class ExpenseEditActivity extends BaseActivity implements EasyPermissions
     @OnClick(R.id.text_date)
     public void onDateClicked() {
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(DateUtils.parse(mExpense.getDate(), "d-M-yyyy"));
+        calendar.setTime(mExpense.getExpenseDate());
         new DatePickerDialog(ExpenseEditActivity.this, (datePicker, year, month, day)
                 -> {
-            mExpense.setDate(DateUtils.toString(DateUtils.getDate(year, month, day), "d-M-yyyy"));
-            mTextDate.setText(mExpense.getDate());
+            mExpense.setExpenseDate(DateUtils.getDate(year, month, day));
+            mTextDate.setText(DateUtils.toString(mExpense.getExpenseDate()));
         },
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),

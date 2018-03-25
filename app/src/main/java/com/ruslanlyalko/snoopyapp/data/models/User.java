@@ -4,52 +4,44 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-    private String userId;
-    private String userName;
-    private String userPhone;
-    private String userEmail;
-    private String userBDay;
-    private String userCard;
-    private boolean userIsAdmin;
-    private String userPositionTitle = "Інструктор, Майстриня";
-    private String userFirstDate;
-    private String userTimeStart = "10:00";
-    private String userTimeEnd = "19:00";
-
-    private int userStavka = 60;
-    private int userPercent = 8;
-    private int mkBd = 0;
-    private int mkBdChild = 8;
-    private int mkArtChild = 10;
-    private boolean mkSpecCalc = false;
-    private String mkSpecCalcDate = "1-8-2017";
+    private String id;
+    private String fullName;
+    private String phone;
+    private String email;
+    private String birthdayDate = "01.06.1991";
+    private String card;
+    private String positionTitle = "Інструктор, Майстриня";
+    private String workingFromDate = "01.06.2017";
+    private String workingStartTime = "10:00";
+    private String workingEndTime = "19:00";
     private String avatar;
     private String token;
-    private boolean receiveNotifications;
-    private boolean showClients;
+    private boolean isAdmin;
+    private boolean isReceiveNotification;
+    private boolean isAllowViewClients;
     private boolean isOnline;
 
-    public User(String userId, String userName, String userPhone, String userEmail, String userBDay, String userFirstDate, String userCard, boolean userIsAdmin) {
-        this.userId = userId;
-        this.userName = userName;
-        this.userPhone = userPhone;
-        this.userEmail = userEmail;
-        this.userBDay = userBDay;
-        this.userCard = userCard;
-        this.userIsAdmin = userIsAdmin;
-        this.userFirstDate = userFirstDate;
+    public User(String id, String fullName, String phone, String email, String birthdayDate, String workingFromDate, String card, boolean isAdmin) {
+        this.id = id;
+        this.fullName = fullName;
+        this.phone = phone;
+        this.email = email;
+        this.birthdayDate = birthdayDate;
+        this.card = card;
+        this.isAdmin = isAdmin;
+        this.workingFromDate = workingFromDate;
     }
 
     public User() {
         // Default constructor required
     }
 
-    public boolean getReceiveNotifications() {
-        return receiveNotifications;
+    public boolean getIsReceiveNotification() {
+        return isReceiveNotification;
     }
 
-    public void setReceiveNotifications(final boolean receiveNotifications) {
-        this.receiveNotifications = receiveNotifications;
+    public void setIsReceiveNotification(final boolean receiveNotification) {
+        this.isReceiveNotification = receiveNotification;
     }
 
     public String getToken() {
@@ -68,156 +60,100 @@ public class User implements Serializable {
         this.avatar = avatar;
     }
 
-    public String getMkSpecCalcDate() {
-        return mkSpecCalcDate;
+    public String getId() {
+        return id;
     }
 
-    public void setMkSpecCalcDate(String mkSpecCalcDate) {
-        this.mkSpecCalcDate = mkSpecCalcDate;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public boolean getMkSpecCalc() {
-        return mkSpecCalc;
+    public boolean getIsAdmin() {
+        return isAdmin;
     }
 
-    public void setMkSpecCalc(boolean mkSpecCalc) {
-        this.mkSpecCalc = mkSpecCalc;
+    public void setIsAdmin(boolean admin) {
+        this.isAdmin = admin;
     }
 
-    public int getMkBdChild() {
-        return mkBdChild;
+    public String getBirthdayDate() {
+        return birthdayDate;
     }
 
-    public void setMkBdChild(int mkBdChild) {
-        this.mkBdChild = mkBdChild;
+    public void setBirthdayDate(String birthdayDate) {
+        this.birthdayDate = birthdayDate;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public int getUserStavka() {
-        return userStavka;
+    public String getFullName() {
+        return this.fullName;
     }
 
-    public void setUserStavka(int userStavka) {
-        this.userStavka = userStavka;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public int getUserPercent() {
-        return userPercent;
+    public String getEmail() {
+        return this.email;
     }
 
-    public void setUserPercent(int userPercent) {
-        this.userPercent = userPercent;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public int getMkArtChild() {
-        return mkArtChild;
+    public String getCard() {
+        return this.card;
     }
 
-    public void setMkArtChild(int mkArtChild) {
-        this.mkArtChild = mkArtChild;
+    public void setCard(String card) {
+        this.card = card;
     }
 
-    public int getMkBd() {
-        return mkBd;
+    public String getPositionTitle() {
+        return positionTitle;
     }
 
-    public void setMkBd(int mkBd) {
-        this.mkBd = mkBd;
+    public void setPositionTitle(String positionTitle) {
+        this.positionTitle = positionTitle;
     }
 
-    public boolean getUserIsAdmin() {
-        return userIsAdmin;
+    public String getWorkingFromDate() {
+        return workingFromDate;
     }
 
-    public void setUserIsAdmin(boolean userIsAdmin) {
-        this.userIsAdmin = userIsAdmin;
+    public void setWorkingFromDate(String workingFromDate) {
+        this.workingFromDate = workingFromDate;
     }
 
-    public String getUserBDay() {
-        return userBDay;
+    public String getWorkingStartTime() {
+        return workingStartTime;
     }
 
-    public void setUserBDay(String userBDay) {
-        this.userBDay = userBDay;
+    public void setWorkingStartTime(String workingStartTime) {
+        this.workingStartTime = workingStartTime;
     }
 
-    public String getUserPhone() {
-        return userPhone;
+    public String getWorkingEndTime() {
+        return workingEndTime;
     }
 
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
+    public void setWorkingEndTime(String workingEndTime) {
+        this.workingEndTime = workingEndTime;
     }
 
-    public String getUserName() {
-        return this.userName;
+    public boolean getIsAllowViewClients() {
+        return isAllowViewClients;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserEmail() {
-        return this.userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public String getUserCard() {
-        return this.userCard;
-    }
-
-    public void setUserCard(String userCard) {
-        this.userCard = userCard;
-    }
-
-    public String getUserPositionTitle() {
-        return userPositionTitle;
-    }
-
-    public void setUserPositionTitle(String userPositionTitle) {
-        this.userPositionTitle = userPositionTitle;
-    }
-
-    public String getUserFirstDate() {
-        return userFirstDate;
-    }
-
-    public void setUserFirstDate(String userFirstDate) {
-        this.userFirstDate = userFirstDate;
-    }
-
-    public String getUserTimeStart() {
-        return userTimeStart;
-    }
-
-    public void setUserTimeStart(String userTimeStart) {
-        this.userTimeStart = userTimeStart;
-    }
-
-    public String getUserTimeEnd() {
-        return userTimeEnd;
-    }
-
-    public void setUserTimeEnd(String userTimeEnd) {
-        this.userTimeEnd = userTimeEnd;
-    }
-
-    public boolean getShowClients() {
-        return showClients;
-    }
-
-    public void setShowClients(final boolean showClients) {
-        this.showClients = showClients;
+    public void setIsAllowViewClients(final boolean allowViewClients) {
+        this.isAllowViewClients = allowViewClients;
     }
 
     public boolean getIsOnline() {

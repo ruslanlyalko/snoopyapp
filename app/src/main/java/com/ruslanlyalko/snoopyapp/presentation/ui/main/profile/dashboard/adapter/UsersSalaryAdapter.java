@@ -76,9 +76,9 @@ public class UsersSalaryAdapter extends RecyclerView.Adapter<UsersSalaryAdapter.
 
         void bindData(final User user, final Integer salary) {
             mUser = user;
-            String text = user.getUserName() + " - " + salary + " грн";
+            String text = user.getFullName() + " - " + salary + " грн";
             textUserName.setText(text);
-            textPositionTitle.setText(user.getUserPositionTitle());
+            textPositionTitle.setText(user.getPositionTitle());
         }
 
         @OnClick(R.id.linear_user)

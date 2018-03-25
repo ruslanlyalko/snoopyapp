@@ -152,7 +152,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         }
         mCurrentUser.updatePassword(password1);
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("userPassword", password1);
+        childUpdates.put("password", password1);
         mDatabase.getReference(DefaultConfigurations.DB_USERS).child(mUid).updateChildren(childUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -168,31 +168,31 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 if (user == null) return;
-                textName.setText(user.getUserName());
-                inputPhone.setText(user.getUserPhone());
-                inputPhone.setTag(user.getUserPhone());
-                inputEmail.setText(user.getUserEmail());
-                inputEmail.setTag(user.getUserEmail());
-                inputBDay.setText(user.getUserBDay());
-                inputBDay.setTag(user.getUserBDay());
-                inputCard.setText(user.getUserCard());
-                inputCard.setTag(user.getUserCard());
-                inputFirstDate.setText(user.getUserFirstDate());
-                inputFirstDate.setTag(user.getUserFirstDate());
-                mSwitchReceiveNotifications.setChecked(user.getReceiveNotifications());
-                mSwitchReceiveNotifications.setTag(user.getReceiveNotifications());
-                mSwitchShowClients.setChecked(user.getShowClients());
-                mSwitchShowClients.setTag(user.getShowClients());
+                textName.setText(user.getFullName());
+                inputPhone.setText(user.getPhone());
+                inputPhone.setTag(user.getPhone());
+                inputEmail.setText(user.getEmail());
+                inputEmail.setTag(user.getEmail());
+                inputBDay.setText(user.getBirthdayDate());
+                inputBDay.setTag(user.getBirthdayDate());
+                inputCard.setText(user.getCard());
+                inputCard.setTag(user.getCard());
+                inputFirstDate.setText(user.getWorkingFromDate());
+                inputFirstDate.setTag(user.getWorkingFromDate());
+                mSwitchReceiveNotifications.setChecked(user.getIsReceiveNotification());
+                mSwitchReceiveNotifications.setTag(user.getIsReceiveNotification());
+                mSwitchShowClients.setChecked(user.getIsAllowViewClients());
+                mSwitchShowClients.setTag(user.getIsAllowViewClients());
                 SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
                 Date dt = new Date();
                 try {
-                    dt = sdf.parse(user.getUserBDay());
+                    dt = sdf.parse(user.getBirthdayDate());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 mBirthDay.setTime(dt);
                 try {
-                    dt = sdf.parse(user.getUserFirstDate());
+                    dt = sdf.parse(user.getWorkingFromDate());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -283,32 +283,32 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         Map<String, Object> childUpdates = new HashMap<>();
         boolean needUpdate = false;
         if (!phone.equals(tPhone)) {
-            childUpdates.put("userPhone", phone);
+            childUpdates.put("phone", phone);
             needUpdate = true;
         }
         if (!birthday.equals(tBirthday)) {
-            childUpdates.put("userBDay", birthday);
+            childUpdates.put("birthdayDate", birthday);
             needUpdate = true;
         }
         if (!card.equals(tCard)) {
-            childUpdates.put("userCard", card);
+            childUpdates.put("card", card);
             needUpdate = true;
         }
         if (!email.equals(tEmail)) {
-            childUpdates.put("userEmail", email);
+            childUpdates.put("email", email);
             mCurrentUser.updateEmail(email);
             needUpdate = true;
         }
         if (!firstDate.equals(tFirstDate)) {
-            childUpdates.put("userFirstDate", firstDate);
+            childUpdates.put("workingFirstDate", firstDate);
             needUpdate = true;
         }
         if (receiveNotifications != tReceiveNotifications) {
-            childUpdates.put("receiveNotifications", receiveNotifications);
+            childUpdates.put("isReceiveNotifications", receiveNotifications);
             needUpdate = true;
         }
         if (showClients != tShowClients) {
-            childUpdates.put("showClients", showClients);
+            childUpdates.put("isAllowViewClients", showClients);
             needUpdate = true;
         }
         if (needUpdate) {

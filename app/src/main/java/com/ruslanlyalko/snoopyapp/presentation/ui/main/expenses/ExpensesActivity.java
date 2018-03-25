@@ -167,9 +167,9 @@ public class ExpensesActivity extends BaseActivity implements OnExpenseClickList
         int mk = 0;
         List<Expense> expenseList = mExpensesAdapter.getData();
         for (Expense expense : expenseList) {
-            if (expense.getTitle2().equalsIgnoreCase(getString(R.string.text_cost_common)))
+            if (expense.getType().equalsIgnoreCase(getString(R.string.text_cost_common)))
                 common += expense.getPrice();
-            if (expense.getTitle2().equalsIgnoreCase(getString(R.string.text_cost_mk)))
+            if (expense.getType().equalsIgnoreCase(getString(R.string.text_cost_mk)))
                 mk += expense.getPrice();
         }
         int total = common + mk;
@@ -306,12 +306,12 @@ public class ExpensesActivity extends BaseActivity implements OnExpenseClickList
 
     @Override
     public void onPhotoPreviewClicked(final Expense expense) {
-        startActivity(PhotoPreviewActivity.getLaunchIntent(this, expense.getUri(), expense.getUserName(), DefaultConfigurations.STORAGE_EXPENSES));
+        startActivity(PhotoPreviewActivity.getLaunchIntent(this, expense.getImage(), expense.getUserName(), DefaultConfigurations.STORAGE_EXPENSES));
     }
 
     private void removeExpense(Expense expense) {
         mDatabase.getReference(DefaultConfigurations.DB_EXPENSES)
-                .child(DateUtils.getYearFromStr(expense.date)).child(DateUtils.getMonthFromStr(expense.date))
+                .child(DateUtils.toString(expense.getExpenseDate(), "yyyy")).child(DateUtils.toString(expense.getExpenseDate(), "M"))
                 .child(expense.getKey()).removeValue().addOnCompleteListener(task ->
                 Snackbar.make(mExpensesList, getString(R.string.snack_deleted), Snackbar.LENGTH_LONG).show());
     }

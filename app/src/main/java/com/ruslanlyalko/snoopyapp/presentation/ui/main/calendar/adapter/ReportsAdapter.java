@@ -72,20 +72,8 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.MyViewHo
         }
 
         void bindData(final Report report) {
-            final boolean commentsExist = report.getComment() != null & !report.getComment().isEmpty();
-            String mkName = "";
-            if (report.getTotalMk() > 0)
-                mkName = " (МК)";
-            if (report.getMkName() != null && !report.getMkName().isEmpty())
-                mkName = " (" + report.getMkName() + ")";
-            textUserName.setText(String.format("%s%s%s", report.userName, mkName, commentsExist ? "*" : ""));
-            textTotal.setText(mResources.getString(R.string.HRN, "" + report.total));
-            textRoomTotal.setText(mResources.getString(R.string.hrn, "" + report.totalRoom));
-            textBdayTotal.setText(mResources.getString(R.string.hrn, "" + report.totalBday));
-            textMkTotal.setText(mResources.getString(R.string.hrn, "" + report.totalMk));
-            progressBar.setMax(report.total);
-            progressBar.setProgress(report.totalRoom);
-            progressBar.setSecondaryProgress(report.totalRoom + report.totalBday);
+            textTotal.setText(mResources.getString(R.string.HRN, "" + report.getOrderTotal()));
+            progressBar.setMax(report.getOrderTotal());
             progressBar.setSecondaryProgressTintMode(PorterDuff.Mode.OVERLAY);
             swipeLayout.addDrag(SwipeLayout.DragEdge.Right, R.id.swipe_menu);
             swipeLayout.setRightSwipeEnabled(true);

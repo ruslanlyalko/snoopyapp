@@ -57,7 +57,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
 
     public void update(final User user) {
         for (int i = 0; i < mDataSource.size(); i++) {
-            if (user.getUserId().equalsIgnoreCase(mDataSource.get(i).getUserId())) {
+            if (user.getId().equalsIgnoreCase(mDataSource.get(i).getId())) {
                 mDataSource.set(i, user);
                 notifyItemChanged(i);
                 break;
@@ -83,10 +83,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
 
         void bindData(final User user) {
             mUser = user;
-            textUserName.setText(user.getUserName());
-            textPositionTitle.setText(user.getUserPositionTitle());
+            textUserName.setText(user.getFullName());
+            textPositionTitle.setText(user.getPositionTitle());
             if(FirebaseUtils.isAdmin())
-                imageNotificationsOff.setVisibility(user.getReceiveNotifications() ? View.GONE : View.VISIBLE);
+                imageNotificationsOff.setVisibility(user.getIsReceiveNotification() ? View.GONE : View.VISIBLE);
             imageUserLogo.setImageResource(user.getIsOnline() ? R.drawable.ic_user_primary : R.drawable.ic_user_name);
         }
 

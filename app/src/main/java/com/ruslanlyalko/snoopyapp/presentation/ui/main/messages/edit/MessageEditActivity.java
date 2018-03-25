@@ -138,7 +138,7 @@ public class MessageEditActivity extends AppCompatActivity {
                     public void onDataChange(final DataSnapshot dataSnapshot) {
                         for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                             User user = userSnapshot.getValue(User.class);
-                            if (user != null && !user.getUserIsAdmin())
+                            if (user != null && !user.getIsAdmin())
                                 mMembersAdapter.add(user);
                         }
                         mMembersAdapter.updateMembers(mMembersIds);
@@ -208,7 +208,7 @@ public class MessageEditActivity extends AppCompatActivity {
             DatabaseReference ref = database.getReference(DefaultConfigurations.DB_DIALOGS)
                     .child(mMessage.getKey())
                     .child("Members")
-                    .child(users.get(i).getUserId());
+                    .child(users.get(i).getId());
             if (checkedList.get(i))
                 ref.setValue(true);
             else

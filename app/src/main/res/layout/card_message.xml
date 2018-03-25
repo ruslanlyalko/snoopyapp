@@ -44,7 +44,7 @@
                 tools:text="Some Name Of" />
 
             <TextView
-                android:id="@+id/title2"
+                android:id="@+id/type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/title1"

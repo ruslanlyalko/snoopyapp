@@ -95,25 +95,20 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.MyView
         void bindData(final Expense expense) {
             boolean isCurrentUserCost = expense.getUserId().endsWith(mCurrentUser.getUid());
             mTextView.setText(expense.getTitle1());
-            mTextTitle2.setText(isCurrentUserCost ? expense.getTitle2() : expense.getTitle2() + "  (" + expense.getUserName() + ")");
+            mTextTitle2.setText(isCurrentUserCost ? expense.getType() : expense.getType() + "  (" + expense.getUserName() + ")");
             mTextPrice.setText(mResources.getString(R.string.hrn, expense.getPrice() + ""));
-            String date = expense.getDate().substring(0, expense.getDate().length() - 5) + " о " + expense.getTime();
-            mTextDate.setText(date);
-            mLogoImage.setImageResource(expense.getUri() != null && !expense.getUri().isEmpty() ?
+            mTextDate.setText(DateUtils.toString(expense.getExpenseDate()));
+            mLogoImage.setImageResource(expense.getImage() != null && !expense.getImage().isEmpty() ?
                     R.drawable.ic_image_light : R.drawable.ic_action_cost);
-            int diff = DateUtils.getDifference(expense.getDate(), expense.getTime());
+            int diff = DateUtils.getDifference(expense.getExpenseDate());
             boolean justAdded = (diff <= Constants.COST_EDIT_MIN);
             // Avoid delete
             if (!FirebaseUtils.isAdmin() && justAdded) {
-                new Handler().postDelayed(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        mSwipeLayout.close();
-                        mSwipeLayout.setRightSwipeEnabled(false);
-                        mMenuLayout.setVisibility(View.GONE);
-                    }
-                    // start this code after 5* minutes
+                // start this code after 5* minutes
+                new Handler().postDelayed(() -> {
+                    mSwipeLayout.close();
+                    mSwipeLayout.setRightSwipeEnabled(false);
+                    mMenuLayout.setVisibility(View.GONE);
                 }, (Constants.COST_EDIT_MIN - diff + 1) * 60 * 1000);
             }
             if (FirebaseUtils.isAdmin() || justAdded) {
@@ -129,7 +124,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.MyView
         void onPhotoPreviewClicked() {
             if (mOnExpenseClickListener != null) {
                 Expense expense = mExpenseList.get(getAdapterPosition());
-                if (expense.getUri() != null && !expense.getUri().isEmpty()) {
+                if (expense.getImage() != null && !expense.getImage().isEmpty()) {
                     mOnExpenseClickListener.onPhotoPreviewClicked(expense);
                 }
             }

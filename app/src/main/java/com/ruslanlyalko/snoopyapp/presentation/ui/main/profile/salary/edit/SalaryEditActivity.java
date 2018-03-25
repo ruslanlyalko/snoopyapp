@@ -32,13 +32,18 @@ import com.ruslanlyalko.snoopyapp.common.Keys;
 import com.ruslanlyalko.snoopyapp.data.configuration.DefaultConfigurations;
 import com.ruslanlyalko.snoopyapp.data.models.User;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class SalaryEditActivity extends AppCompatActivity {
 
+    LinearLayout panelDate;
+    // VARIABLES
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    String key;
+    User user = new User();
+    boolean needToSave = false;
     private EditText editStavka;
     private EditText editPercent;
     private EditText editMkBirthday;
@@ -46,16 +51,8 @@ public class SalaryEditActivity extends AppCompatActivity {
     private EditText editMkArt;
     private TextView textDate;
     private Switch switchSalary;
-
     private Calendar mDate = Calendar.getInstance();
-    LinearLayout panelDate;
     private SimpleDateFormat mSdf = new SimpleDateFormat("d-M-yyyy", Locale.US);
-
-    // VARIABLES
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    String key;
-    User user = new User();
-    boolean needToSave = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,21 +145,6 @@ public class SalaryEditActivity extends AppCompatActivity {
 
     private void updateUI() {
         setTitle(R.string.title_activity_edit);
-        if (user != null) {
-            editStavka.setText(String.valueOf(user.getUserStavka()));
-            editPercent.setText(String.valueOf(user.getUserPercent()));
-            editMkBirthday.setText(String.valueOf(user.getMkBd()));
-            editMkChild.setText(String.valueOf(user.getMkBdChild()));
-            editMkArt.setText(String.valueOf(user.getMkArtChild()));
-            textDate.setText(String.valueOf(user.getMkSpecCalcDate()));
-            switchSalary.setChecked(user.getMkSpecCalc());
-            updateEditsEnabled(user.getMkSpecCalc());
-            try {
-                mDate.setTime(mSdf.parse(user.getMkSpecCalcDate()));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
         needToSave = false;
     }
 
@@ -180,34 +162,12 @@ public class SalaryEditActivity extends AppCompatActivity {
         String mk = editMkBirthday.getText().toString().trim();
         String mkChild = editMkChild.getText().toString().trim();
         String art = editMkArt.getText().toString().trim();
-        user.setMkSpecCalc(switchSalary.isChecked());
-        user.setMkSpecCalcDate(textDate.getText().toString());
-        try {
-            user.setUserStavka(Integer.parseInt(stavka));
-        } catch (Exception e) {
-        }
-        try {
-            user.setUserPercent(Integer.parseInt(percent));
-        } catch (Exception e) {
-        }
-        try {
-            user.setMkArtChild(Integer.parseInt(art));
-        } catch (Exception e) {
-        }
-        try {
-            user.setMkBd(Integer.parseInt(mk));
-        } catch (Exception e) {
-        }
-        try {
-            user.setMkBdChild(Integer.parseInt(mkChild));
-        } catch (Exception e) {
-        }
     }
 
     private void saveToDb() {
         updateUserModel();
         database.getReference(DefaultConfigurations.DB_USERS)
-                .child(user.getUserId()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                .child(user.getId()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(SalaryEditActivity.this, getString(R.string.mk_updated), Toast.LENGTH_SHORT).show();

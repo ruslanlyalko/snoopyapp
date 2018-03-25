@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
-import com.github.sundeepk.compactcalendarview.domain.Event;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -32,7 +31,6 @@ import com.ruslanlyalko.snoopyapp.data.configuration.DefaultConfigurations;
 import com.ruslanlyalko.snoopyapp.data.models.Report;
 import com.ruslanlyalko.snoopyapp.presentation.ui.main.calendar.adapter.OnReportClickListener;
 import com.ruslanlyalko.snoopyapp.presentation.ui.main.calendar.adapter.ReportsAdapter;
-import com.ruslanlyalko.snoopyapp.presentation.ui.main.mk.MkDetailsActivity;
 import com.ruslanlyalko.snoopyapp.presentation.ui.main.report.ReportActivity;
 
 import java.text.ParseException;
@@ -85,14 +83,11 @@ public class CalendarActivity extends AppCompatActivity implements OnReportClick
         showReportsForDate(today);
     }
 
-    @OnClick(R.id.button_prev)
-    void onPrevClicked() {
-        mCompactCalendarView.showPreviousMonth();
-    }
-
-    @OnClick(R.id.button_next)
-    void onNextClicked() {
-        mCompactCalendarView.showNextMonth();
+    private void initRecycle() {
+        mReportList = new ArrayList<>();
+        mReportsAdapter = new ReportsAdapter(this, mReportList);
+        mReportsList.setLayoutManager(new LinearLayoutManager(this));
+        mReportsList.setAdapter(mReportsAdapter);
     }
 
     private void initCalendarView() {
@@ -126,20 +121,6 @@ public class CalendarActivity extends AppCompatActivity implements OnReportClick
         });
     }
 
-    private void initRecycle() {
-        mReportList = new ArrayList<>();
-        mReportsAdapter = new ReportsAdapter(this, mReportList);
-        mReportsList.setLayoutManager(new LinearLayoutManager(this));
-        mReportsList.setAdapter(mReportsAdapter);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        showReportsOnCalendar();
-        reloadReportsForDate();
-    }
-
     private void showReportsOnCalendar() {
         mSwipeRefresh.setRefreshing(true);
         mDatabase.getReference(DefaultConfigurations.DB_REPORTS)
@@ -153,13 +134,13 @@ public class CalendarActivity extends AppCompatActivity implements OnReportClick
                                 for (DataSnapshot datMonth : datYear.getChildren()) {
                                     for (DataSnapshot datDay : datMonth.getChildren()) {
                                         Report report = datDay.getValue(Report.class);
-                                        if (report != null && (FirebaseUtils.isAdmin() || report.getUserId().equals(mUserId) || DateUtils.future(report.getDate()))) {
-                                            int color = getUserColor(report.getUserId());
-                                            long date = getDateLongFromStr(report.getDate());
-                                            String uId = report.getUserId();
-                                            mCompactCalendarView.addEvent(
-                                                    new Event(color, date, uId), true);
-                                        }
+//                                        if (report != null && (FirebaseUtils.isAdmin() || report.getUserId().equals(mUserId) || DateUtils.future(report.getReportDate()))) {
+//                                            int color = getUserColor(report.getUserId());
+//                                            long date = getDateLongFromStr(report.getReportDate());
+//                                            String uId = report.getUserId();
+//                                            mCompactCalendarView.addEvent(
+//                                                    new Event(color, date, uId), true);
+//                                        }
                                     }
                                 }
                             }
@@ -173,8 +154,57 @@ public class CalendarActivity extends AppCompatActivity implements OnReportClick
                 });
     }
 
+    private void showReportsForDate(Date date) {
+        mCurrentDate = date;
+        mTextAddReport.setVisibility((FirebaseUtils.isAdmin() || DateUtils.isTodayOrFuture(date))
+                ? View.VISIBLE : View.GONE);
+        String mDay = DateFormat.format("d", date).toString();
+        String mMonth = DateFormat.format("M", date).toString();
+        String mYear = DateFormat.format("yyyy", date).toString();
+        mDatabase.getReference(DefaultConfigurations.DB_REPORTS)
+                .child(mYear)
+                .child(mMonth)
+                .child(mDay)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(final DataSnapshot dataSnapshot) {
+                        mReportList.clear();
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+                            Report report = data.getValue(Report.class);
+                            if (report != null) {
+//                                if (FirebaseUtils.isAdmin() || report.getUserId().equals(mUserId)) {
+//                                    mReportList.add(report);
+//                                }
+                            }
+                        }
+                        mReportsAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(final DatabaseError databaseError) {
+                    }
+                });
+    }
+
     private void reloadReportsForDate() {
         showReportsForDate(mCurrentDate);
+    }
+
+    @OnClick(R.id.button_prev)
+    void onPrevClicked() {
+        mCompactCalendarView.showPreviousMonth();
+    }
+
+    @OnClick(R.id.button_next)
+    void onNextClicked() {
+        mCompactCalendarView.showNextMonth();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        showReportsOnCalendar();
+        reloadReportsForDate();
     }
 
     private int getUserColor(String userId) {
@@ -201,38 +231,6 @@ public class CalendarActivity extends AppCompatActivity implements OnReportClick
         return dateLong;
     }
 
-    private void showReportsForDate(Date date) {
-        mCurrentDate = date;
-        mTextAddReport.setVisibility((FirebaseUtils.isAdmin() || DateUtils.isTodayOrFuture(date))
-                ? View.VISIBLE : View.GONE);
-        String mDay = DateFormat.format("d", date).toString();
-        String mMonth = DateFormat.format("M", date).toString();
-        String mYear = DateFormat.format("yyyy", date).toString();
-        mDatabase.getReference(DefaultConfigurations.DB_REPORTS)
-                .child(mYear)
-                .child(mMonth)
-                .child(mDay)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(final DataSnapshot dataSnapshot) {
-                        mReportList.clear();
-                        for (DataSnapshot data : dataSnapshot.getChildren()) {
-                            Report report = data.getValue(Report.class);
-                            if (report != null) {
-                                if (FirebaseUtils.isAdmin() || report.getUserId().equals(mUserId)) {
-                                    mReportList.add(report);
-                                }
-                            }
-                        }
-                        mReportsAdapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onCancelled(final DatabaseError databaseError) {
-                    }
-                });
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -245,33 +243,35 @@ public class CalendarActivity extends AppCompatActivity implements OnReportClick
 
     @Override
     public void onCommentClicked(final Report report) {
-        final boolean commentsExist = report.getComment() != null & !report.getComment().isEmpty();
-        if (commentsExist)
-            Toast.makeText(this, report.getComment(), Toast.LENGTH_SHORT).show();
+//        final boolean commentsExist = report.getComment() != null & !report.getComment().isEmpty();
+//        if (commentsExist)
+//            Toast.makeText(this, report.getComment(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onMkClicked(final Report report) {
-        if (report.getMkRef() != null && !report.getMkRef().isEmpty()) {
-            Intent intent = new Intent(this, MkDetailsActivity.class);
-            intent.putExtra(Keys.Extras.EXTRA_ITEM_ID, report.getMkRef());
-            startActivity(intent);
-        } else {
-            Toast.makeText(this, R.string.toast_mk_not_set, Toast.LENGTH_SHORT).show();
-        }
+//        if (report.getMkRef() != null && !report.getMkRef().isEmpty()) {
+//            Intent intent = new Intent(this, MkDetailsActivity.class);
+//            intent.putExtra(Keys.Extras.EXTRA_ITEM_ID, report.getMkRef());
+//            startActivity(intent);
+//        } else {
+//            Toast.makeText(this, R.string.toast_mk_not_set, Toast.LENGTH_SHORT).show();
+//        }
     }
 
     @Override
     public void onEditClicked(final Report report) {
-        if (FirebaseUtils.isAdmin() || DateUtils.todayOrFuture(report.getDate())) {
+//        if (FirebaseUtils.isAdmin() || DateUtils.todayOrFuture(report.getReportDate()))
+        {
             Intent intent = new Intent(this, ReportActivity.class);
-            intent.putExtra(Keys.Extras.EXTRA_DATE, report.date);
-            intent.putExtra(Keys.Extras.EXTRA_UID, report.userId);
-            intent.putExtra(Keys.Extras.EXTRA_USER_NAME, report.userName);
+            intent.putExtra(Keys.Extras.EXTRA_DATE, report.getReportDate());
+            intent.putExtra(Keys.Extras.EXTRA_UID, report.getCreatedBy());
+            intent.putExtra(Keys.Extras.EXTRA_USER_NAME, report.getCreatedById());
             startActivityForResult(intent, 0);
-        } else {
-            Toast.makeText(this, R.string.toast_edit_impossible, Toast.LENGTH_SHORT).show();
         }
+//        else{
+//            Toast.makeText(this, R.string.toast_edit_impossible, Toast.LENGTH_SHORT).show();
+//        }
     }
 
     @OnClick(R.id.button_add_report)

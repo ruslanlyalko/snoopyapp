@@ -316,11 +316,6 @@ public class DashboardActivity extends AppCompatActivity implements OnItemClickL
         int room = 0;
         int bday = 0;
         int mk = 0;
-        for (Report rep : reportList) {
-            room += rep.totalRoom;
-            bday += rep.totalBday;
-            mk += rep.totalMk;
-        }
         incomeTotal = room + bday + mk;
         textRoom.setText(String.format(getString(R.string.hrn), DateUtils.getIntWithSpace(room)));
         textBday.setText(String.format(getString(R.string.hrn), DateUtils.getIntWithSpace(bday)));
@@ -338,9 +333,9 @@ public class DashboardActivity extends AppCompatActivity implements OnItemClickL
         int common = 0;
         int mk = 0;
         for (Expense expense : mExpenseList) {
-            if (expense.getTitle2().equalsIgnoreCase(getString(R.string.text_cost_common)))
+            if (expense.getType().equalsIgnoreCase(getString(R.string.text_cost_common)))
                 common += expense.getPrice();
-            if (expense.getTitle2().equalsIgnoreCase(getString(R.string.text_cost_mk)))
+            if (expense.getType().equalsIgnoreCase(getString(R.string.text_cost_mk)))
                 mk += expense.getPrice();
         }
         costTotal = common + mk;
@@ -499,88 +494,6 @@ public class DashboardActivity extends AppCompatActivity implements OnItemClickL
     }
 
     private void calcSalaryForUsers() {
-        String birthdays = "";
-        salaryTotal = 0;
-        int stavka = 0;
-        int percent = 0;
-        int mkBirthday = 0;
-        int mkArt = 0;
-        int mkBirthdayCount = 0;
-        int mkBirthdayChildren = 0;
-        int mkArtCount = 0;
-        int mkArtChildren = 0;
-        String usersSalary = "";
-        mUsersSalaryAdapter.clearAll();
-        for (User user : userList) {
-            int uPercentTotal = 0;
-            int uStavka = 0;
-            int uMkArt = 0;
-            int uMkBirth = 0;
-            //init hrn
-            int userStavka = Constants.SALARY_DEFAULT_STAVKA;
-            int userPercent = Constants.SALARY_DEFAULT_PERCENT;
-            int userMkBirthday = Constants.SALARY_DEFAULT_MK;
-            int userMkBdChild = Constants.SALARY_DEFAULT_MK_CHILD;
-            int userMkArtChild = Constants.SALARY_DEFAULT_ART_MK_CHILD;
-            boolean isDefault = true;
-            for (Report rep : reportList) {
-                //required only for Dashboard calc salary
-                if (!rep.getUserId().equals(user.getUserId())) continue;
-                if (isDefault && user.getMkSpecCalc() && DateUtils.isTodayOrFuture(rep.getDate(), user.getMkSpecCalcDate())) {
-                    userStavka = user.getUserStavka();
-                    userPercent = user.getUserPercent();
-                    userMkBirthday = user.getMkBd();
-                    userMkBdChild = user.getMkBdChild();
-                    userMkArtChild = user.getMkArtChild();
-                    isDefault = false;
-                }
-                if (DateUtils.future(rep.getDate())) continue;
-                // stavka
-                if(rep.getHalfSalary())
-                    uStavka+=(userStavka/2);
-                else
-                    uStavka += userStavka;
-                // percent
-                uPercentTotal += rep.total;
-                //Birthdays Mk
-                uMkBirth += rep.bMk * userMkBirthday;
-                uMkBirth += rep.b30 * userMkBdChild;
-                mkBirthdayCount += rep.bMk;
-                mkBirthdayChildren += rep.b30;
-                // Art MK
-                if (rep.mkMy) {
-                    uMkArt += (rep.mk1 + rep.mk2) * userMkArtChild;
-                    if (rep.mk1 != 0 || rep.mk2 != 0)
-                        mkArtCount += 1;
-                    mkArtChildren += rep.mk1;
-                    mkArtChildren += rep.mk2;
-                }
-            }
-            int uPercent = (uPercentTotal * userPercent / 100);
-            stavka += uStavka;
-            mkArt += uMkArt;
-            mkBirthday += uMkBirth;
-            percent += uPercent;
-            int uTotal = (uMkArt + uMkBirth + uStavka + uPercent);
-            if (uTotal > 0) {
-                usersSalary += uTotal + " - " + user.getUserName() + "\n";
-                mUsersSalaryAdapter.add(user, uTotal);
-            }
-            // birthdays list
-            if (!user.getUserIsAdmin())
-                birthdays += user.getUserBDay() + " - " + user.getUserName() + "\n";
-        }
-        //mTextExpand.setText(usersSalary);
-        textBirthdays.setText(birthdays);
-        salaryTotal = stavka + percent + mkBirthday + mkArt;
-        textSalaryStavka.setText(String.format(getString(R.string.hrn), DateUtils.getIntWithSpace(stavka)));
-        textSalaryPercent.setText(String.format(getString(R.string.hrn), DateUtils.getIntWithSpace(percent)));
-        textSalaryMk.setText(String.format(getString(R.string.hrn), DateUtils.getIntWithSpace(mkBirthday + mkArt)));
-        textSalaryTotal.setText(String.format(getString(R.string.HRN), DateUtils.getIntWithSpace(salaryTotal)));
-        progressBarSalary.setMax(salaryTotal);
-        progressBarSalary.setProgress(stavka);
-        progressBarSalary.setSecondaryProgress(stavka + percent);
-        updateNetIncome();
     }
 
     private void updateBarChart(List<Result> resultList) {
@@ -698,7 +611,7 @@ public class DashboardActivity extends AppCompatActivity implements OnItemClickL
     public void onItemClicked(final int position) {
         User user = mUsersSalaryAdapter.getItemAtPosition(position);
         startActivity(SalaryActivity.getLaunchIntent(this,
-                user.getUserId(),
+                user.getId(),
                 user));
     }
 

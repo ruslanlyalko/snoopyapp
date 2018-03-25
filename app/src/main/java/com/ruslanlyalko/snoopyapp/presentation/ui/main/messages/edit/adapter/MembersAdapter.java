@@ -60,7 +60,7 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MyViewHo
 
     public void updateMembers(List<String> membersIds) {
         for (int i = 0; i < mDataSource.size(); i++) {
-            mMembers.set(i, membersIds.contains(mDataSource.get(i).getUserId()));
+            mMembers.set(i, membersIds.contains(mDataSource.get(i).getId()));
         }
         notifyDataSetChanged();
     }
@@ -87,8 +87,8 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MyViewHo
 
         void bindData(final User user, final Boolean isMember) {
             mUser = user;
-            textUserName.setText(user.getUserName());
-            textPositionTitle.setText(user.getUserPositionTitle());
+            textUserName.setText(user.getFullName());
+            textPositionTitle.setText(user.getPositionTitle());
             mSwitchMember.setChecked(isMember);
         }
 

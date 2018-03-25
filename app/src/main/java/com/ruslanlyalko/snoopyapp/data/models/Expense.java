@@ -1,55 +1,45 @@
 package com.ruslanlyalko.snoopyapp.data.models;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Expense implements Serializable {
 
-    public String key;
-    public String title1;
-    public String title2;
-    public String date;
-    public String time;
-    public String uri;
-    public String userId;
-    public String userName;
-    public int price;
+    private String key;
+    private String title1;
+    private String type;
+    private int price;
+    private Date expenseDate;
+    private String image;
+    private String userId;
+    private String userName;
 
     public Expense() {
     }
 
-    public Expense(final String title2, final String date, final String time, final String userId, final String userName) {
-        this.title2 = title2;
-        this.date = date;
-        this.time = time;
+    public Expense(final String type, final Date date, final String userId, final String userName) {
+        this.type = type;
+        this.expenseDate = date;
         this.userId = userId;
         this.userName = userName;
     }
 
-
-    public Expense(String title1, String title2, String date, String uri, String userId, String userName, int price) {
+    public Expense(String title1, String type, Date date, String image, String userId, String userName, int price) {
         this.title1 = title1;
-        this.title2 = title2;
-        this.date = date;
-        this.uri = uri;
+        this.type = type;
+        this.expenseDate = date;
+        this.image = image;
         this.userId = userId;
         this.userName = userName;
         this.price = price;
     }
 
-    public String getTime() {
-        return time;
+    public String getImage() {
+        return image;
     }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
-
-    public String getUri() {
-        return uri;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getUserId() {
@@ -84,12 +74,12 @@ public class Expense implements Serializable {
         this.key = key;
     }
 
-    public String getDate() {
-        return date;
+    public Date getExpenseDate() {
+        return expenseDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setExpenseDate(final Date expenseDate) {
+        this.expenseDate = expenseDate;
     }
 
     public String getTitle1() {
@@ -100,11 +90,11 @@ public class Expense implements Serializable {
         this.title1 = title1;
     }
 
-    public String getTitle2() {
-        return title2;
+    public String getType() {
+        return type;
     }
 
-    public void setTitle2(String title2) {
-        this.title2 = title2;
+    public void setType(String type) {
+        this.type = type;
     }
 }

@@ -240,26 +240,11 @@ public class SalaryActivity extends AppCompatActivity {
     }
 
     private void initUserData() {
-        mTextName.setText(mUser.getUserName());
-        mTextCard.setText(mUser.getUserCard());
+        mTextName.setText(mUser.getFullName());
+        mTextCard.setText(mUser.getCard());
     }
 
     private void updateConditionUI(Date firstDayOfNewMonth) {
-        String date = new SimpleDateFormat("d-M-yyyy", Locale.US).format(firstDayOfNewMonth);
-        boolean isSpecCalc = mUser.getMkSpecCalc() && DateUtils.isTodayOrFuture(date, mUser.getMkSpecCalcDate());
-        if (isSpecCalc) {
-            mTextSalaryStavka.setText(String.format(getString(R.string.hrn_day), String.valueOf(mUser.getUserStavka())));
-            mTextSalaryPercent.setText(String.format(getString(R.string.hrn_percent), String.valueOf(mUser.getUserPercent())));
-            mTextSalaryMk.setText(String.format(getString(R.string.hrn), String.valueOf(mUser.getMkBd())));
-            mTextSalaryMkChildren.setText(String.format(getString(R.string.hrn_child), String.valueOf(mUser.getMkBdChild())));
-            mTextSalaryArt.setText(String.format(getString(R.string.hrn_child), String.valueOf(mUser.getMkArtChild())));
-            return;
-        }
-        mTextSalaryStavka.setText(String.format(getString(R.string.hrn_day), String.valueOf(Constants.SALARY_DEFAULT_STAVKA)));
-        mTextSalaryPercent.setText(String.format(getString(R.string.hrn_percent), String.valueOf(Constants.SALARY_DEFAULT_PERCENT)));
-        mTextSalaryMk.setText(String.format(getString(R.string.hrn), String.valueOf(Constants.SALARY_DEFAULT_MK)));
-        mTextSalaryMkChildren.setText(String.format(getString(R.string.hrn_child), String.valueOf(Constants.SALARY_DEFAULT_MK_CHILD)));
-        mTextSalaryArt.setText(String.format(getString(R.string.hrn_child), String.valueOf(Constants.SALARY_DEFAULT_ART_MK_CHILD)));
     }
 
     @Override
@@ -268,73 +253,5 @@ public class SalaryActivity extends AppCompatActivity {
         calcSalary();
     }
 
-    private void calcSalary() {
-        //init hrn
-        int userStavka = Constants.SALARY_DEFAULT_STAVKA;
-        int userPercent = Constants.SALARY_DEFAULT_PERCENT;
-        int userMkBirthday = Constants.SALARY_DEFAULT_MK;
-        int userMkBdChild = Constants.SALARY_DEFAULT_MK_CHILD;
-        int userMkArtChild = Constants.SALARY_DEFAULT_ART_MK_CHILD;
-        //check what exactly we have
-        int stavka = 0;
-        int percentTotal = 0;
-        int percent;
-        int mkBirthday = 0;
-        int mkBirthdayCount = 0;
-        int mkBirthdayChildren = 0;
-        int mkArt = 0;
-        int mkArtCount = 0;
-        int mkArtChildren = 0;
-        if (mUser.getMkSpecCalc()
-                && mReports.size() > 0
-                && DateUtils.isTodayOrFuture(mReports.get(0).getDate(), mUser.getMkSpecCalcDate())) {
-            userStavka = mUser.getUserStavka();
-            userPercent = mUser.getUserPercent();
-            userMkBirthday = mUser.getMkBd();
-            userMkBdChild = mUser.getMkBdChild();
-            userMkArtChild = mUser.getMkArtChild();
-        }
-        for (Report rep : mReports) {
-            if (DateUtils.future(rep.getDate())) continue;
-            // stavka
-            if (rep.getHalfSalary())
-                stavka += (userStavka / 2);
-            else
-                stavka += userStavka;
-            // percent
-            percentTotal += rep.total;
-            //Birthdays Mk
-            mkBirthday += rep.bMk * userMkBirthday;
-            mkBirthday += rep.b30 * userMkBdChild;
-            mkBirthdayCount += rep.bMk;
-            mkBirthdayChildren += rep.b30;
-            // Art MK
-            if (rep.mkMy) {
-                mkArt += (rep.mk1 + rep.mk2) * userMkArtChild;
-                if (rep.mk1 != 0 || rep.mk2 != 0)
-                    mkArtCount += 1;
-                mkArtChildren += rep.mk1;
-                mkArtChildren += rep.mk2;
-            }
-        }
-        percent = (percentTotal * userPercent / 100);
-        int total = stavka + percent + mkBirthday + mkArt;
-        mTextStavka.setText(String.format(getString(R.string.hrn), DateUtils.getIntWithSpace(stavka)));
-        mTextPercent.setText(String.format(getString(R.string.hrn), DateUtils.getIntWithSpace(percent)));
-        mTextMk.setText(String.format(getString(R.string.hrn), DateUtils.getIntWithSpace(mkBirthday + mkArt)));
-        mTotalSwitcher.setText(String.format(getString(R.string.HRN), DateUtils.getIntWithSpace(total)));
-        String text1 = "В цьому місяці було " + mReports.size() + " робочих днів \n";
-        text1 += "Загальна виручка " + percentTotal + " грн \n\n";
-        text1 += "Проведено " + mkBirthdayCount + " МК на Днях Народженнях \n";
-        text1 += "На яких було присутньо " + mkBirthdayChildren + " дітей \n";
-        text1 += "Зароблено " + mkBirthday + " грн\n\n";
-        text1 += "Проведено " + mkArtCount + " Творчих та Кулінарних МК \n";
-        text1 += "На яких було присутньо " + mkArtChildren + " дітей \n";
-        text1 += "Зароблено " + mkArt + " грн\n\n";
-        text1 += "Аванс: до 20-го чиса;  ЗП: до 5-го числа\n";
-        mTextExpand.setText(text1);
-        mProgressBar.setMax(total);
-        mProgressBar.setProgress(stavka);
-        mProgressBar.setSecondaryProgress(stavka + percent);
-    }
+    private void calcSalary() {}
 }

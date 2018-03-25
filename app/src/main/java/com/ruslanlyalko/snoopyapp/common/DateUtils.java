@@ -118,6 +118,12 @@ public class DateUtils {
         return (int) TimeUnit.MILLISECONDS.toMinutes(diff);
     }
 
+    public static int getDifference(Date date) {
+        // Get msec from each, and subtract.
+        long diff = new Date().getTime() - date.getTime();
+        return (int) TimeUnit.MILLISECONDS.toMinutes(diff);
+    }
+
     public static String getUpdatedAt(final Date updatedAt) {
         if (isTodayOrFuture(updatedAt))
             return toString(updatedAt, "HH:mm");

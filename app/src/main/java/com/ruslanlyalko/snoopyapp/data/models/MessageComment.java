@@ -27,8 +27,8 @@ public class MessageComment {
     public MessageComment(final String key, final String message, User user) {
         this.key = key;
         this.message = message;
-        this.userId = user.getUserId();
-        this.userName = user.getUserName();
+        this.userId = user.getId();
+        this.userName = user.getFullName();
         this.userAvatar = user.getAvatar();
         this.date = new Date();
     }

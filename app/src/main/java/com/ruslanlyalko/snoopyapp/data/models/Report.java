@@ -4,215 +4,183 @@ import java.util.Date;
 
 public class Report {
 
-    public String userId;
-    public String userName;
-    public String date;
-    public String mkRef;
-    public String mkName;
-
-    public int total;
-    public int totalRoom;
-    public int totalBday;
-    public int totalMk;
-
-    public int r60;
-    public int r30;
-    public int r20;
-    public int r10;
-
-    public int b50;
-    public int b10;
-    public int b30;
-    public int bMk;
-
-    public int mk1;
-    public int mk2;
-    public int mkt1;
-    public int mkt2;
-    public boolean mkMy = true;
-    public String imageUri;
-
-    public String comment;
-
-    private boolean checkedListDone;
-    private Date checkedListTime;
-    private double checkedListLatitude;
-    private double checkedListLongitude;
-
-    private boolean halfSalary;
+    private String key;
+    private Date reportDate;
+    private String phone;
+    private String place;
+    private boolean isPinyataOrdered;
+    private float orderHours;
+    private int orderRate;
+    private int orderPinyataPrice;
+    private int orderTotal;
+    private int childrenCount;
+    private int childrenAgesFrom;
+    private int childrenAgesTo;
+    private String childName;
+    private int childAge;
+    private String comment;
+    private String createdBy;
+    private String createdById;
+    private Date createdDate;
+    private Date updatedDate;
 
     public Report() {
     }
 
-    public Report(String userId, String userName, String date) {
-        this.userId = userId;
-        this.userName = userName;
-        this.date = date;
-        this.mkRef = "";
-        this.mkName = "";
-        this.imageUri = "";
+    public Report(String createdBy, String createdById, String reportDate) {
+        this.createdBy = createdBy;
+        this.createdById = createdById;
     }
 
-    public double getCheckedListLatitude() {
-        return checkedListLatitude;
+    public String getKey() {
+        return key;
     }
 
-    public void setCheckedListLatitude(final double checkedListLatitude) {
-        this.checkedListLatitude = checkedListLatitude;
+    public void setKey(final String key) {
+        this.key = key;
     }
 
-    public double getCheckedListLongitude() {
-        return checkedListLongitude;
+    public Date getReportDate() {
+        return reportDate;
     }
 
-    public void setCheckedListLongitude(final double checkedListLongitude) {
-        this.checkedListLongitude = checkedListLongitude;
+    public void setReportDate(final Date reportDate) {
+        this.reportDate = reportDate;
     }
 
-    public boolean getCheckedListDone() {
-        return checkedListDone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setCheckedListDone(final boolean checkedListDone) {
-        this.checkedListDone = checkedListDone;
+    public void setPhone(final String phone) {
+        this.phone = phone;
     }
 
-    public Date getCheckedListTime() {
-        return checkedListTime;
+    public String getPlace() {
+        return place;
     }
 
-    public void setCheckedListTime(final Date checkedListTime) {
-        this.checkedListTime = checkedListTime;
+    public void setPlace(final String place) {
+        this.place = place;
     }
 
-    public String getImageUri() {
-        return imageUri;
+    public boolean getIsPinyataOrdered() {
+        return isPinyataOrdered;
+    }
+
+    public void setIsPinyataOrdered(final boolean pinyataOrdered) {
+        isPinyataOrdered = pinyataOrdered;
+    }
+
+    public float getOrderHours() {
+        return orderHours;
+    }
+
+    public void setOrderHours(final float orderHours) {
+        this.orderHours = orderHours;
+    }
+
+    public int getOrderRate() {
+        return orderRate;
+    }
+
+    public void setOrderRate(final int orderRate) {
+        this.orderRate = orderRate;
+    }
+
+    public int getOrderPinyataPrice() {
+        return orderPinyataPrice;
+    }
+
+    public void setOrderPinyataPrice(final int orderPinyataPrice) {
+        this.orderPinyataPrice = orderPinyataPrice;
+    }
+
+    public int getOrderTotal() {
+        return orderTotal;
+    }
+
+    public void setOrderTotal(final int orderTotal) {
+        this.orderTotal = orderTotal;
+    }
+
+    public int getChildrenCount() {
+        return childrenCount;
+    }
+
+    public void setChildrenCount(final int childrenCount) {
+        this.childrenCount = childrenCount;
+    }
+
+    public int getChildrenAgesFrom() {
+        return childrenAgesFrom;
+    }
+
+    public void setChildrenAgesFrom(final int childrenAgesFrom) {
+        this.childrenAgesFrom = childrenAgesFrom;
+    }
+
+    public int getChildrenAgesTo() {
+        return childrenAgesTo;
+    }
+
+    public void setChildrenAgesTo(final int childrenAgesTo) {
+        this.childrenAgesTo = childrenAgesTo;
+    }
+
+    public String getChildName() {
+        return childName;
+    }
+
+    public void setChildName(final String childName) {
+        this.childName = childName;
+    }
+
+    public int getChildAge() {
+        return childAge;
+    }
+
+    public void setChildAge(final int childAge) {
+        this.childAge = childAge;
     }
 
     public String getComment() {
         return comment;
     }
 
-    public int getB10() {
-        return b10;
+    public void setComment(final String comment) {
+        this.comment = comment;
     }
 
-    public boolean isMkMy() {
-        return mkMy;
+    public String getCreatedBy() {
+        return createdBy;
     }
 
-    public int getR10() {
-        return r10;
+    public void setCreatedBy(final String createdBy) {
+        this.createdBy = createdBy;
     }
 
-    public String getMkRef() {
-        return mkRef;
+    public String getCreatedById() {
+        return createdById;
     }
 
-    public String getMkName() {
-        return mkName;
+    public void setCreatedById(final String createdById) {
+        this.createdById = createdById;
     }
 
-    public String getUserName() {
-        return userName;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public String getUserId() {
-        return userId;
+    public void setCreatedDate(final Date createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public String getDate() {
-        return date;
+    public Date getUpdatedDate() {
+        return updatedDate;
     }
 
-    public int getTotal() {
-        return total;
-    }
-
-    public int getTotalRoom() {
-        return totalRoom;
-    }
-
-    public int getTotalBday() {
-        return totalBday;
-    }
-
-    public int getTotalMk() {
-        return totalMk;
-    }
-
-    public int getR60() {
-        return r60;
-    }
-
-    public int getR30() {
-        return r30;
-    }
-
-    public int getR20() {
-        return r20;
-    }
-
-    public int getB50() {
-        return b50;
-    }
-
-    public int getB30() {
-        return b30;
-    }
-
-    public int getbMk() {
-        return bMk;
-    }
-
-    public int getMk1() {
-        return mk1;
-    }
-
-    public int getMk2() {
-        return mk2;
-    }
-
-    public int getMkt1() {
-        return mkt1;
-    }
-
-    public int getMkt2() {
-        return mkt2;
-    }
-
-    public boolean getHalfSalary() {
-        return halfSalary;
-    }
-
-    public void setHalfSalary(final boolean halfSalary) {
-        this.halfSalary = halfSalary;
-    }
-
-    public void clearReport(boolean clearMK) {
-        r60 = 0;
-        r30 = 0;
-        r20 = 0;
-        r10 = 0;
-        b50 = 0;
-        b10 = 0;
-        b30 = 0;
-        bMk = 0;
-        mkMy = true;
-        mk1 = 0;
-        mkt1 = 0;
-        mk2 = 0;
-        mkt2 = 0;
-        comment = "";
-        imageUri = "";
-        if (clearMK) {
-            mkName = "";
-            mkRef = "";
-        }
-        checkedListLatitude = 0;
-        checkedListLongitude = 0;
-        checkedListDone = false;
-        halfSalary = false;
-        checkedListTime = null;
+    public void setUpdatedDate(final Date updatedDate) {
+        this.updatedDate = updatedDate;
     }
 }

@@ -82,7 +82,7 @@
     <string name="hint_title2">Тип</string>
     <string name="hint_title1">Назва</string>
     <string name="text_cost_common">Загальні</string>
-    <string name="text_cost_mk">На мк</string>
+    <string name="text_cost_mk">На свято</string>
     <string name="text_cost_list">Список витрат</string>
     <string name="action_delete_all">  ВИДАЛИТИ ВСЕ  </string>
     <string name="dialog_cost_delete_title">Видалити витрату</string>
@@ -259,5 +259,17 @@
     <string name="shortcut_report_short_label">Свято</string>
     <string name="shortcut_report_long_label">Перейти в Свято</string>
     <string name="text_tile">Відкрити SNOOPY</string>
+    <string name="hint_child">Іменинник</string>
+    <string name="hint_child_ages">Вік</string>
+    <string name="hint_place">Місце проведення</string>
+    <string name="hint_parent">Імя</string>
+
+    <string-array name="markArray">
+        <item>1</item>
+        <item>4</item>
+        <item>8</item>
+        <item>12</item>
+        <item>16</item>
+    </string-array>
 
 </resources>

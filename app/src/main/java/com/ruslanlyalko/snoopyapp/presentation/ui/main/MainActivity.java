@@ -108,10 +108,10 @@ public class MainActivity extends BaseActivity {
                     public void onDataChange(final DataSnapshot dataSnapshot) {
                         User user = dataSnapshot.getValue(User.class);
                         if (user != null) {
-                            FirebaseUtils.setIsAdmin(user.getUserIsAdmin());
+                            FirebaseUtils.setIsAdmin(user.getIsAdmin());
                             FirebaseUtils.setUser(user);
                             if (isDestroyed()) return;
-                            mLayoutClients.setVisibility(user.getUserIsAdmin() || user.getShowClients() ? View.VISIBLE : View.GONE);
+                            mLayoutClients.setVisibility(user.getIsAdmin() || user.getIsAllowViewClients() ? View.VISIBLE : View.GONE);
                         }
                     }
 

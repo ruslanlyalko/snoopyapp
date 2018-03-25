@@ -61,7 +61,7 @@ public class FirebaseUtils {
                             if (user != null)
                                 FirebaseDatabase.getInstance()
                                         .getReference(DefaultConfigurations.DB_USERS_NOTIFICATIONS)
-                                        .child(user.getUserId())
+                                        .child(user.getId())
                                         .child(notKey)
                                         .removeValue();
                         }

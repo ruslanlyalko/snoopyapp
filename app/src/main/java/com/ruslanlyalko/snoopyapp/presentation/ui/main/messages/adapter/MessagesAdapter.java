@@ -91,7 +91,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyView
     class MyViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.title1) TextView title1;
-        @BindView(R.id.title2) TextView title2;
+        @BindView(R.id.type) TextView title2;
         @BindView(R.id.text_date) TextView date;
         @BindView(R.id.layout_root) LinearLayout mLinearLayout;
         @BindView(R.id.image_view) ImageView mImageView;

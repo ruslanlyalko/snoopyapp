@@ -115,15 +115,7 @@ public class MkPlanActivity extends AppCompatActivity {
                     Report report = data.getValue(Report.class);
                     // Add to list only current user reports
                     // But if user role - Admin then add all reports
-                    if (report != null) {
-                        if (FirebaseUtils.isAdmin() || report.getUserId().equals(uId)) {
-                            // check if has MK name
-                            if (report.getTotalMk() > 0 || (report.getMkRef() != null && !report.getMkRef().isEmpty())) {
-                                reportList.add(report);
-                                mPlanAdapter.notifyDataSetChanged();
-                            }
-                        }
-                    }
+
                 }
             }
 

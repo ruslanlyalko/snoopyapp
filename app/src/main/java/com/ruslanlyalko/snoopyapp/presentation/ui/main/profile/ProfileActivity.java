@@ -135,7 +135,7 @@ public class ProfileActivity extends AppCompatActivity implements OnItemClickLis
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                         User user = dataSnapshot.getValue(User.class);
                         if (user != null) {
-                            if (user.getUserId().equals(mUID)) {
+                            if (user.getId().equals(mUID)) {
                                 mUser = user;
                                 updateUI(user);
                             } else if (needLoadFriends) {
@@ -148,7 +148,7 @@ public class ProfileActivity extends AppCompatActivity implements OnItemClickLis
                     public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                         User user = dataSnapshot.getValue(User.class);
                         if (user != null) {
-                            if (user.getUserId().equals(mUID)) {
+                            if (user.getId().equals(mUID)) {
                                 mUser = user;
                                 updateUI(user);
                             } else if (needLoadFriends) {
@@ -221,20 +221,20 @@ public class ProfileActivity extends AppCompatActivity implements OnItemClickLis
 
     private void updateUI(User user) {
         if (user == null || mAuth.getCurrentUser() == null) return;
-        final boolean myPage = mUser.getUserId().equals(mAuth.getCurrentUser().getUid());
+        final boolean myPage = mUser.getId().equals(mAuth.getCurrentUser().getUid());
         // if current user is admin or open his friends
         fab.setVisibility(FirebaseUtils.isAdmin() || myPage ? View.VISIBLE : View.GONE);
-        if (mUser.getUserIsAdmin() && myPage)
+        if (mUser.getIsAdmin() && myPage)
             fab.setImageResource(R.drawable.ic_action_money);
-        mTitlePositionText.setText(user.getUserPositionTitle());
-        collapsingToolbar.setTitle(user.getUserName());
-        mPhoneText.setText(user.getUserPhone());
-        mEmailText.setText(user.getUserEmail());
-        mBDayText.setText(user.getUserBDay());
-        mCardText.setText(user.getUserCard());
-        mTimeText.setText(user.getUserTimeStart() + " - " + user.getUserTimeEnd());
-        mFirstDateText.setText(user.getUserFirstDate());
-        final String phone = user.getUserPhone();
+        mTitlePositionText.setText(user.getPositionTitle());
+        collapsingToolbar.setTitle(user.getFullName());
+        mPhoneText.setText(user.getPhone());
+        mEmailText.setText(user.getEmail());
+        mBDayText.setText(user.getBirthdayDate());
+        mCardText.setText(user.getCard());
+        mTimeText.setText(user.getWorkingStartTime() + " - " + user.getWorkingEndTime());
+        mFirstDateText.setText(user.getWorkingFromDate());
+        final String phone = user.getPhone();
         mPhoneLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -243,7 +243,7 @@ public class ProfileActivity extends AppCompatActivity implements OnItemClickLis
                 startActivity(callIntent);
             }
         });
-        final String email = user.getUserEmail();
+        final String email = user.getEmail();
         mEmailLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -253,7 +253,7 @@ public class ProfileActivity extends AppCompatActivity implements OnItemClickLis
                 Toast.makeText(ProfileActivity.this, getString(R.string.text_copied), Toast.LENGTH_SHORT).show();
             }
         });
-        final String card = user.getUserCard();
+        final String card = user.getCard();
         mCardLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -263,7 +263,7 @@ public class ProfileActivity extends AppCompatActivity implements OnItemClickLis
                 Toast.makeText(ProfileActivity.this, getString(R.string.text_copied), Toast.LENGTH_SHORT).show();
             }
         });
-        if (FirebaseUtils.isAdmin() && !user.getUserId().equals(mAuth.getCurrentUser().getUid())) {
+        if (FirebaseUtils.isAdmin() && !user.getId().equals(mAuth.getCurrentUser().getUid())) {
             mFirsDateLayout.setVisibility(View.VISIBLE);
         }
         if (user.getAvatar() != null && !user.getAvatar().isEmpty()) {
@@ -292,7 +292,7 @@ public class ProfileActivity extends AppCompatActivity implements OnItemClickLis
 
     @OnClick(R.id.fab)
     void onFabClicked() {
-        final boolean myPage = mUser.getUserId().equals(mAuth.getCurrentUser().getUid());
+        final boolean myPage = mUser.getId().equals(mAuth.getCurrentUser().getUid());
         if (FirebaseUtils.isAdmin() && myPage) {
             startActivity(DashboardActivity.getLaunchIntent(ProfileActivity.this));
         } else {
@@ -365,7 +365,7 @@ public class ProfileActivity extends AppCompatActivity implements OnItemClickLis
 
     @Override
     public void onItemClicked(final int position) {
-        startActivity(ProfileActivity.getLaunchIntent(this, mUsersAdapter.getItemAtPosition(position).getUserId()));
+        startActivity(ProfileActivity.getLaunchIntent(this, mUsersAdapter.getItemAtPosition(position).getId()));
     }
 
     public static Intent getLaunchIntent(final Activity launchIntent, final String userId) {

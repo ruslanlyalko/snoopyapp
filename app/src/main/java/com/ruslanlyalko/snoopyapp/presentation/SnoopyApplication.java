@@ -38,7 +38,7 @@ public class SnoopyApplication extends Application {
                     public void onDataChange(final DataSnapshot dataSnapshot) {
                         User user = dataSnapshot.getValue(User.class);
                         if (user != null) {
-                            FirebaseUtils.setIsAdmin(user.getUserIsAdmin());
+                            FirebaseUtils.setIsAdmin(user.getIsAdmin());
                             FirebaseUtils.setUser(user);
                         }
                     }
